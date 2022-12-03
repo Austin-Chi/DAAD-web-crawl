@@ -10,9 +10,7 @@ doc = Document()
 
 # 文件存储路径
 path = "/Users/austin/Desktop/test/docxt/"
-if not os.path.exists("images"):
-        os.mkdir("images")  # 建立資料夾
-        print("directory built!")
+
 # 读取文档
 # doc = Document(path + "tryit.docx")
 
@@ -26,14 +24,16 @@ if not os.path.exists("images"):
 # path = '/Users/austin/Desktop/NTUEE_2_1/Coding/morning.txt'
 num = 0
 check = np.zeros(200)
-for page in range(1,14):
+for page in range(1,2):
     response0 = requests.get(
         "https://www.daad.org.tw/de/ueber-uns/aktuelles/page/"+str(page)+"/")
     soup0 = BeautifulSoup(response0.text, "html.parser")
     teaser_results = soup0.find_all("div", class_="teaser two-column-teaser")
     for tesear_result in teaser_results:
         num+=1
-        st = tesear_result.select_one("a").get("href")
+        st0 = tesear_result.select_one("a")
+        title=st0.get("title")
+        st=st0.get("href")
         print(st)
         response = requests.get(
         st)
@@ -53,6 +53,7 @@ for page in range(1,14):
         
         paras = result.select("p")
         # f = open(path, 'a')
+        doc.add_heading(title)
         if check[num] == 1:
             doc.add_picture(path + 'images/'+str(num)+'.jpg', width=Pt(500))
         for para in paras:
