@@ -24,7 +24,7 @@ path = "/Users/austin/Desktop/test/docxt/"
 # path = '/Users/austin/Desktop/NTUEE_2_1/Coding/morning.txt'
 num = 0
 check = np.zeros(200)
-for page in range(1,2):
+for page in range(12,14):
     response0 = requests.get(
         "https://www.daad.org.tw/de/ueber-uns/aktuelles/page/"+str(page)+"/")
     soup0 = BeautifulSoup(response0.text, "html.parser")
